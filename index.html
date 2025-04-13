@@ -7,8 +7,6 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- الحاوية -->
   <div class="container">
 
     <!-- الشعار -->
@@ -17,12 +15,48 @@
     <!-- العنوان -->
     <h1>حاسبة العائد البنكي 💰</h1>
 
-    <!-- المدخلات -->
-    <input type="number" id="amount" placeholder="ادخل المبلغ بالجنيه المصري" />
-    <br />
-    <input type="number" id="rate" placeholder="ادخل نسبة الفائدة (%)" />
-    <br />
+    <!-- اختيار البنك -->
+    <label for="bank">اختر البنك:</label>
+    <select id="bank" onchange="updateCertificates()"></select>
+
+    <!-- فلتر نوع الشهادة -->
+    <div class="filter-options">
+      <label><input type="radio" name="filterType" value="all" checked onchange="updateCertificates()"> الكل</label>
+      <label><input type="radio" name="filterType" value="شهادة" onchange="updateCertificates()"> شهادات</label>
+      <label><input type="radio" name="filterType" value="وديعة" onchange="updateCertificates()"> ودائع</label>
+    </div>
+
+    <!-- اختيار الشهادة / الوديعة -->
+    <label for="certificate">اختر الشهادة / الوديعة:</label>
+    <select id="certificate" onchange="setRateFromCertificate()"></select>
+
+    <!-- إدخال المبلغ -->
+    <label for="amount">المبلغ:</label>
+    <input type="number" id="amount" placeholder="أدخل المبلغ بالجنيه المصري" />
+
+    <!-- إدخال نسبة الفائدة -->
+    <label for="rate">نسبة الفائدة:</label>
+    <input type="number" id="rate" placeholder="تظهر تلقائيًا بعد اختيار الشهادة" />
+
+    <!-- فترة العائد -->
+    <div class="period-options">
+      <label><input type="radio" name="period" value="daily"> يومي</label>
+      <label><input type="radio" name="period" value="monthly" checked> شهري</label>
+      <label><input type="radio" name="period" value="yearly"> سنوي</label>
+    </div>
+
+    <!-- اختيار العملة -->
+    <label for="currency">العملة:</label>
+    <select id="currency">
+      <option value="EGP">جنيه 🇪🇬</option>
+      <option value="USD">دولار 🇺🇸</option>
+      <option value="SAR">ريال 🇸🇦</option>
+      <option value="EUR">يورو 🇪🇺</option>
+    </select>
+
+    <!-- زر الحساب -->
     <button onclick="calculateInterest()">احسب العائد 💸</button>
+    <button id="toggleTheme" onclick="toggleTheme()">🌙 الوضع الليلي</button>
 
     <!-- النتيجة -->
     <div id="result"></div>
