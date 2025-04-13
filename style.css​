@@ -1,19 +1,9 @@
-/* إعدادات أساسية للصفحة */
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f6f8;
-  color: #333;
-  margin: 0;
-  padding: 20px;
-  direction: rtl;
-}
-
-/* الحاوية الرئيسية */
+/* container يتحكم في تمركز كل حاجة */
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   text-align: center;
   min-height: 100vh;
 }
@@ -22,63 +12,6 @@ body {
 .logo {
   max-width: 120px;
   height: auto;
-  display: block;
   margin: 20px auto;
-}
-
-/* العنوان */
-h1 {
-  font-size: 26px;
-  color: #0077cc;
-  margin-bottom: 30px;
-}
-
-/* الحقول */
-input {
-  padding: 10px;
-  margin: 10px auto;
-  width: 90%;
-  max-width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
   display: block;
-  font-size: 16px;
-}
-
-/* الزرار */
-button {
-  background-color: #0077cc;
-  color: white;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
-  display: inline-block;
-}
-
-button:hover {
-  background-color: #005fa3;
-}
-
-/* النتيجة */
-#result {
-  margin-top: 25px;
-  font-size: 20px;
-  font-weight: bold;
-  color: green;
-}
-
-/* الفوتر */
-footer {
-  margin-top: 40px;
-  font-size: 14px;
-  color: #888;
-}
-
-footer a {
-  color: #0077cc;
-  text-decoration: none;
 }
