@@ -7,11 +7,11 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
 
+  <div class="container">
     <!-- الشعار -->
-<img src="https://i.postimg.cc/Qxp0n6jY/logo.webp" alt="شعار التطبيق" class="logo">
-    
+    <img src="https://i.postimg.cc/Qxp0n6jY/logo.webp" alt="شعار التطبيق" class="logo" />
+
     <!-- العنوان -->
     <h1>حاسبة العائد البنكي 💰</h1>
 
@@ -55,32 +55,7 @@
     </select>
 
     <!-- زر الحساب -->
-function calculateInterest() {
-  let amount = parseFloat(document.getElementById("amount").value);
-  let rate = parseFloat(document.getElementById("rate").value);
-  let period = document.querySelector('input[name="period"]:checked')?.value;
-  let currency = document.getElementById("currency").value;
-
-  if (isNaN(amount) || isNaN(rate) || !period) {
-    document.getElementById("result").innerText = "يرجى إدخال البيانات بشكل صحيح.";
-    return;
-  }
-
-  let yearlyInterest = (amount * rate) / 100;
-  let result;
-
-  if (period === "daily") {
-    result = yearlyInterest / 365;
-  } else if (period === "monthly") {
-    result = yearlyInterest / 12;
-  } else {
-    result = yearlyInterest;
-  }
-
-  document.getElementById("result").innerText =
-    `💡 العائد ${getPeriodName(period)}: ${result.toFixed(2)} ${getCurrencySymbol(currency)}`;
-}
-
+    <button onclick="calculateInterest()">احسب العائد 💸</button>
     <button id="toggleTheme" onclick="toggleTheme()">🌙 الوضع الليلي</button>
 
     <!-- النتيجة -->
@@ -90,10 +65,9 @@ function calculateInterest() {
     <footer>
       <p><a href="privacy.html">سياسة الخصوصية</a></p>
     </footer>
-
   </div>
 
-<script src="script.js"></script>
+  <!-- ملف الجافاسكربت -->
+  <script src="script.js"></script>
 </body>
 </html>
-
