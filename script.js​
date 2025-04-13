@@ -16,7 +16,6 @@ const bankCertificates = [
     ]
   }
 ];
-
 // 🧩 تعبئة قائمة البنوك
 function populateBanks() {
   const bankSelect = document.getElementById("bank");
@@ -27,6 +26,9 @@ function populateBanks() {
     bankSelect.appendChild(option);
   });
 }
+window.onload = function () {
+  populateBanks();
+};
 
 // 🧩 تعبئة الشهادات عند اختيار بنك + فلترة حسب النوع
 function updateCertificates() {
