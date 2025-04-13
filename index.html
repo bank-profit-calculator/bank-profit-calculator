@@ -55,7 +55,32 @@
     </select>
 
     <!-- زر الحساب -->
-    <button onclick="calculateInterest()">احسب العائد 💸</button>
+function calculateInterest() {
+  let amount = parseFloat(document.getElementById("amount").value);
+  let rate = parseFloat(document.getElementById("rate").value);
+  let period = document.querySelector('input[name="period"]:checked')?.value;
+  let currency = document.getElementById("currency").value;
+
+  if (isNaN(amount) || isNaN(rate) || !period) {
+    document.getElementById("result").innerText = "يرجى إدخال البيانات بشكل صحيح.";
+    return;
+  }
+
+  let yearlyInterest = (amount * rate) / 100;
+  let result;
+
+  if (period === "daily") {
+    result = yearlyInterest / 365;
+  } else if (period === "monthly") {
+    result = yearlyInterest / 12;
+  } else {
+    result = yearlyInterest;
+  }
+
+  document.getElementById("result").innerText =
+    `💡 العائد ${getPeriodName(period)}: ${result.toFixed(2)} ${getCurrencySymbol(currency)}`;
+}
+
     <button id="toggleTheme" onclick="toggleTheme()">🌙 الوضع الليلي</button>
 
     <!-- النتيجة -->
