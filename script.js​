@@ -94,6 +94,24 @@ function calculateInterest() {
   document.getElementById("result").innerText =
     `💡 العائد ${getPeriodName(period)}: ${result.toFixed(2)} ${getCurrencySymbol(currency)}`;
 }
+function getPeriodName(value) {
+  switch (value) {
+    case 'daily': return 'اليومي';
+    case 'monthly': return 'الشهري';
+    case 'yearly': return 'السنوي';
+    default: return '';
+  }
+}
+
+function getCurrencySymbol(code) {
+  switch (code) {
+    case 'EGP': return 'جنيه';
+    case 'USD': return '$';
+    case 'SAR': return 'ر.س';
+    case 'EUR': return '€';
+    default: return '';
+  }
+}
 
 
   if (isNaN(amount) || isNaN(rate) || !period) {
