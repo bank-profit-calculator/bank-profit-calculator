@@ -3,10 +3,15 @@ body {
   font-family: 'Arial', sans-serif;
   background-color: #f4f6f8;
   color: #333;
-  text-align: center;
   margin: 0;
   padding: 20px;
   direction: rtl;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  text-align: center;
 }
 
 /* الشعار */
@@ -34,7 +39,7 @@ input {
   border: 1px solid #ccc;
   border-radius: 6px;
   display: block;
-  font-size: 16px;
+  font-size: 10px;
 }
 
 /* الزرار */
@@ -48,6 +53,7 @@ button {
   font-size: 16px;
   margin-top: 10px;
   transition: background-color 0.3s ease;
+  display: inline-block;
 }
 
 button:hover {
