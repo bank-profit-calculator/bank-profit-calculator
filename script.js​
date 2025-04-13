@@ -29,6 +29,7 @@ function populateBanks() {
 window.onload = function () {
   populateBanks();
 };
+<script src="script.js"></script>
 
 // 🧩 تعبئة الشهادات عند اختيار بنك + فلترة حسب النوع
 function updateCertificates() {
