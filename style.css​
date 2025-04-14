@@ -1,225 +1,157 @@
-/* CSS المعدل مع تحسينات التنسيق */
 :root {
-  --primary-color: #0077cc;
-  --hover-color: #005fa3;
-  --background-color: #f4f6f8;
-  --text-color: #333;
-  --input-border: #ddd;
-  --container-bg: #fff;
-  --footer-color: #888;
+  --primary-color: #2c7be5;
+  --secondary-color: #00d97e;
+  --text-color: #1e2a3a;
+  --light-bg: #f9fafc;
+  --border-color: #e3ebf6;
+  --error-color: #e63757;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: var(--background-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light-bg);
   color: var(--text-color);
-  margin: 0;
-  padding: 0;
-  direction: rtl;
+  line-height: 1.6;
+  padding: 20px;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-/* تصميم الحاوية الرئيسية */
-.container {
-  width: 90%;
-  max-width: 400px;
-  background-color: var(--container-bg);
+.app-container {
+  width: 100%;
+  max-width: 450px;
+  background: white;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 25px;
-  margin: 20px auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+header {
   text-align: center;
-
-}  .container {
-    padding: 20px 15px;
-  }
-}
-/* تصميم اللوجو */
-..logo {
-  width: 70px; /* أو أي حجم تفضله بين 50-80px */
-  height: auto;
-  margin: 0 auto 10px;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  padding: 20px;
+  background-color: var(--primary-color);
+  color: white;
 }
 
-.logo:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
+.app-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 10px;
 }
 
-/* العنوان الرئيسي */
 h1 {
   font-size: 1.5rem;
-  margin-bottom: 1.5rem;
+  font-weight: 600;
 }
 
+.calculator {
+  padding: 20px;
+}
 
-/* مجموعات الإدخال */
 .input-group {
-  margin-bottom: 15px;
-  text-align: right;
+  margin-bottom: 20px;
 }
-@media (max-width: 480px) {
-  .logo {
-    width: 60px; /* حجم أصغر للشاشات الصغيرة */
-  }
 
-.input-group label {
+label {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 0.9rem;
 }
 
-/* حقول الإدخال والقوائم المنسدلة */
-input, select {
-  padding: 10px 12px;
-  margin: 0 auto;
+select, input {
   width: 100%;
-  max-width: 280px;
-  font-size: 14px;
-  border: 1px solid var(--input-border);
-  border-radius: 6px;
-  background-color: #fff;
-  transition: border-color 0.3s;
+  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s;
 }
 
-input:focus, select:focus {
+select:focus, input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(0, 119, 204, 0.2);
-}
-
-/* خيارات الفلتر والفترة */
-.filter-options, .period-options {
-  margin: 15px 0;
-  text-align: center;
+  box-shadow: 0 0 0 3px rgba(44, 123, 229, 0.1);
 }
 
 .radio-group {
   display: flex;
-  justify-content: center;
   gap: 15px;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .radio-group label {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 14px;
+  font-weight: normal;
   cursor: pointer;
 }
 
-/* تصميم الأزرار */
-.button-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 20px 0;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 14px;
+.primary-btn {
+  width: 100%;
+  padding: 14px;
   background-color: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: var(--hover-color);
-}
-
-button.calculate-btn {
+  border-radius: 8px;
+  font-size: 1rem;
   font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
 }
 
-button.theme-btn {
-  background-color: #555;
+.primary-btn:hover {
+  background-color: #1a68d1;
 }
 
-button.theme-btn:hover {
-  background-color: #333;
-}
-
-/* تصميم نتيجة الحساب */
 .result-container {
-  margin: 20px 0;
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  text-align: right;
-}
-
-.result-card {
-  background: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.result-card h3 {
-  margin-top: 0;
-  color: var(--primary-color);
-  font-size: 16px;
-  text-align: center;
-}
-
-.result-card p {
-  margin: 8px 0;
-  font-size: 14px;
-}
-
-.result-card strong {
-  color: var(--primary-color);
-}
-
-/* تصميم الفوتر */
-footer {
   margin-top: 25px;
-  font-size: 12px;
-  color: var(--footer-color);
+  padding: 20px;
+  background-color: var(--light-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.result-container h3 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
   text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 0.8rem;
+  color: #6e84a3;
+  border-top: 1px solid var(--border-color);
 }
 
 footer a {
   color: var(--primary-color);
   text-decoration: none;
-  transition: color 0.3s;
 }
 
-footer a:hover {
-  text-decoration: underline;
-}
-
-.copyright {
-  margin-top: 8px;
-}
-
-/* الوضع الليلي */
-body.dark-theme {
-  --background-color: #1a1a1a;
-  --container-bg: #2d2d2d;
-  --text-color: #f0f0f0;
-  --input-border: #444;
-  --footer-color: #aaa;
-}
-
-.dark-theme input,
-.dark-theme select {
-  background-color: #333;
-  color: #fff;
-  border-color: #555;
-}
-
-.dark-theme .result-container {
-  background-color: #252525;
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+  
+  .app-container {
+    border-radius: 8px;
+  }
 }
