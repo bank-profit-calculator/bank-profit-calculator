@@ -39,12 +39,16 @@ body {
   }
 }
 /* تصميم اللوجو */
-.logo {
-  width: 70px; /* تم تقليل الحجم من 150px إلى 70px */
-  height: auto; /* للحفاظ على التناسب */
-  margin: 0 auto 15px; /* تعديل الهوامش */
-  display: block;
-  transition: all 0.3s ease; /* إضافة تأثير انتقالي */
+..logo {
+  width: 70px; /* أو أي حجم تفضله بين 50-80px */
+  height: auto;
+  margin: 0 auto 10px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
 }
 
 /* العنوان الرئيسي */
