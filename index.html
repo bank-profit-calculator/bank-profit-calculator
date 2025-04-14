@@ -4,236 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>حاسبة الفوائد البسيطة</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        
-        body {
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .calculator-container {
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            padding: 30px;
-            width: 100%;
-            max-width: 450px;
-            text-align: center;
-        }
-        
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 25px;
-        }
-        
-        .input-group {
-            margin-bottom: 20px;
-            text-align: right;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #34495e;
-        }
-        
-        input[type="number"] {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            text-align: right;
-        }
-        
-        .time-options {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 15px 0;
-        }
-        
-        .time-option {
-            position: relative;
-        }
-        
-        .time-option input {
-            position: absolute;
-            opacity: 0;
-        }
-        
-        .time-option span {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #f0f2f5;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .time-option input:checked + span {
-            background-color: #3498db;
-            color: white;
-        }
-        
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 14px;
-            width: 100%;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background-color 0.3s;
-        }
-        
-        button:hover {
-            background-color: #2980b9;
-        }
-        
-        .result {
-            margin-top: 25px;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
-        }
-        
-        #interest-result {
-            line-height: 1.8;
-            font-size: 16px;
-        }
-        
-        #interest-result p {
-            margin-bottom: 8px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="calculator-container">
-        <h1>حاسبة الفوائد البسيطة</h1>
-        
-        <div class="input-group">
-            <label for="amount">المبلغ الأساسي:</label>
-            <input type="number" id="amount" placeholder="أدخل المبلغ">
-        </div>
-        
-        <div class="input-group">
-            <label for="rate">نسبة الفائدة (%):</label>
-            <input type="number" id="rate" placeholder="أدخل النسبة">
-        </div>
-        
-        <div class="input-group">
-            <label>اختر نوع الفترة:</label>
-            <div class="time-options">
-                <label class="time-option">
-                    <input type="radio" name="period" value="days">
-                    <span>أيام</span>
-                </label>
-                <label class="time-option">
-                    <input type="radio" name="period" value="months">
-                    <span>أشهر</span>
-                </label>
-                <label class="time-option">
-                    <input type="radio" name="period" value="years" checked>
-                    <span>سنوات</span>
-                </label>
+    <div class="container">
+        <div class="calculator">
+            <h1>حاسبة الفوائد البسيطة</h1>
+            
+            <div class="input-group">
+                <label for="amount">المبلغ الأساسي:</label>
+                <input type="number" id="amount" placeholder="أدخل المبلغ">
             </div>
-            <input type="number" id="time-value" placeholder="أدخل مدة الفترة">
-        </div>
-        
-        <button onclick="calculateInterest()">احسب</button>
-        
-        <div class="result">
-            <h2>النتائج:</h2>
-            <div id="interest-result">
-                <p>سيتظهر هنا نتيجة الحساب</p>
+            
+            <div class="input-group">
+                <label for="rate">نسبة الفائدة (%):</label>
+                <input type="number" id="rate" placeholder="أدخل النسبة">
+            </div>
+            
+            <div class="input-group">
+                <label>اختر نوع الفترة:</label>
+                <div class="time-options">
+                    <label class="time-option">
+                        <input type="radio" name="period" value="days">
+                        <span>أيام</span>
+                    </label>
+                    <label class="time-option">
+                        <input type="radio" name="period" value="months">
+                        <span>أشهر</span>
+                    </label>
+                    <label class="time-option">
+                        <input type="radio" name="period" value="years" checked>
+                        <span>سنوات</span>
+                    </label>
+                </div>
+                <input type="number" id="time-value" placeholder="أدخل مدة الفترة">
+            </div>
+            
+            <button id="calculate-btn">احسب</button>
+            
+            <div class="result">
+                <h2>النتائج:</h2>
+                <div id="interest-result">
+                    <p>سيتظهر هنا نتيجة الحساب</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <script>
-        function calculateInterest() {
-            // مسح النتائج السابقة
-            const resultDiv = document.getElementById('interest-result');
-            resultDiv.innerHTML = '';
-            
-            // الحصول على القيم
-            const amount = parseFloat(document.getElementById('amount').value);
-            const rate = parseFloat(document.getElementById('rate').value);
-            const timeValue = parseFloat(document.getElementById('time-value').value);
-            const period = document.querySelector('input[name="period"]:checked').value;
-            
-            // التحقق من المدخلات
-            if (isNaN(amount)) {
-                showError('الرجاء إدخال المبلغ الأساسي');
-                return;
-            }
-            
-            if (isNaN(rate)) {
-                showError('الرجاء إدخال نسبة الفائدة');
-                return;
-            }
-            
-            if (isNaN(timeValue) || timeValue <= 0) {
-                showError('الرجاء إدخال فترة زمنية صحيحة');
-                return;
-            }
-            
-            // حساب الفترة بالسنوات
-            let years, periodName;
-            switch(period) {
-                case 'days':
-                    years = timeValue / 365;
-                    periodName = 'أيام';
-                    break;
-                case 'months':
-                    years = timeValue / 12;
-                    periodName = 'أشهر';
-                    break;
-                case 'years':
-                    years = timeValue;
-                    periodName = 'سنوات';
-                    break;
-            }
-            
-            // حساب الفائدة
-            const interest = (amount * rate * years) / 100;
-            const total = amount + interest;
-            
-            // عرض النتائج
-            showResult(amount, rate, timeValue, periodName, interest, total);
-        }
-        
-        function showError(message) {
-            const resultDiv = document.getElementById('interest-result');
-            resultDiv.innerHTML = `<p style="color: #e74c3c;">${message}</p>`;
-        }
-        
-        function showResult(amount, rate, time, periodName, interest, total) {
-            const resultDiv = document.getElementById('interest-result');
-            
-            resultDiv.innerHTML = `
-                <p><strong>المبلغ الأساسي:</strong> ${amount.toFixed(2)}</p>
-                <p><strong>نسبة الفائدة:</strong> ${rate}%</p>
-                <p><strong>المدة:</strong> ${time} ${periodName}</p>
-                <hr style="margin: 10px 0; border: 0.5px solid #ddd;">
-                <p><strong>قيمة الفائدة:</strong> ${interest.toFixed(2)}</p>
-                <p><strong>المبلغ الإجمالي:</strong> ${total.toFixed(2)}</p>
-            `;
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
