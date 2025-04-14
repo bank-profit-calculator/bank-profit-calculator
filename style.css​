@@ -9,25 +9,25 @@ body {
 
 /* توسيط العناصر */
 .container {
-  max-width: 400px; /* قللت من 600 إلى 400 */
+  max-width: 400px; /* تقليل من 600px إلى 400px */
   margin: 0 auto;
   padding: 15px;
   text-align: center;
 }
 
+
 /* اللوجو */
 .logo {
-  width: 60px; /* كان 80 */
-  height: auto;
+  width: 60px; /* تقليل من 80px إلى 60px */
   margin: 15px auto;
-  display: block;
-  object-fit: contain;
 }
-
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 /* العنوان */
 h1 {
-  font-size: 22px; /* قللنا الحجم */
-  color: #0077cc;
+  font-size: 22px; /* تقليل من 26px إلى 22px */
   margin-bottom: 20px;
 }
 
@@ -36,25 +36,17 @@ input, select {
   padding: 8px;
   margin: 8px auto;
   width: 100%;
-  max-width: 260px; /* قللنا الماكس */
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  display: block;
+  max-width: 260px; /* تقليل من 300px إلى 260px */
   font-size: 14px;
+}
 }
 
 /* الأزرار */
 button {
-  background-color: #0077cc;
-  color: white;
-  padding: 10px 20px; /* أصغر شوية */
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+  padding: 10px 20px; /* تقليل من 12px 25px إلى 10px 20px */
   font-size: 14px;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
 }
+
 
 button:hover {
   background-color: #005fa3;
@@ -62,16 +54,12 @@ button:hover {
 
 /* النتيجة */
 #result {
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: bold;
-  color: green;
+  font-size: 18px; /* تقليل من 20px إلى 18px */
 }
-
 /* الفوتر */
 footer {
   margin-top: 30px;
-  font-size: 12px;
+  font-size: 12px; /* تقليل من 14px إلى 12px */
   color: #888;
 }
 footer a {
