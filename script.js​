@@ -106,6 +106,7 @@ function setRateFromCertificate() {
 }
 
 // حساب العائد
+// حساب العائد
 function calculateInterest() {
   let amount = parseFloat(document.getElementById("amount").value);
   let rate = parseFloat(document.getElementById("rate").value);
