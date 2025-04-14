@@ -44,6 +44,22 @@ input {
     box-sizing: border-box;
 }
 
+.time-options {
+    display: flex;
+    gap: 10px;
+}
+
+.time-options > div {
+    flex: 1;
+}
+
+.time-options span {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
 button {
     background-color: #3498db;
     color: white;
