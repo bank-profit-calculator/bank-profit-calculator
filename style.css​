@@ -12,19 +12,16 @@ body {
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+    direction: rtl;
 }
 
-.container {
-    width: 100%;
-    max-width: 500px;
-}
-
-.calculator {
+.calculator-container {
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
     padding: 30px;
     width: 100%;
+    max-width: 450px;
     text-align: center;
 }
 
@@ -117,4 +114,8 @@ button:hover {
 
 #interest-result p {
     margin-bottom: 8px;
+}
+
+.error {
+    color: #e74c3c;
 }
