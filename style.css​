@@ -2,30 +2,32 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
     margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
     padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-}
 
 .calculator {
     background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
     padding: 30px;
     width: 100%;
-    max-width: 500px;
+    max-width: 450px;
+    text-align: center;
 }
 
 h1 {
     color: #2c3e50;
-    text-align: center;
     margin-bottom: 30px;
-}
-
-.input-group {
-    margin-bottom: 20px;
 }
 
 label {
@@ -35,41 +37,56 @@ label {
     color: #34495e;
 }
 
-input {
+input[type="number"] {
     width: 100%;
     padding: 12px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 16px;
     box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
-.time-options {
+.time-period {
     display: flex;
-    gap: 10px;
+    justify-content: center;
+    gap: 15px;
+    margin: 15px 0;
 }
 
-.time-options > div {
-    flex: 1;
+.time-option {
+    position: relative;
 }
 
-.time-options span {
-    display: block;
-    text-align: center;
-    margin-top: 5px;
-    font-size: 14px;
+.time-option input[type="radio"] {
+    display: none;
+}
+
+.time-option label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.time-option input[type="radio"]:checked + label {
+    background-color: #3498db;
+    color: white;
 }
 
 button {
     background-color: #3498db;
     color: white;
     border: none;
-    padding: 12px 20px;
-    border-radius: 5px;
+    padding: 14px 25px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
     width: 100%;
     transition: background-color 0.3s;
+    margin-top: 10px;
 }
 
 button:hover {
@@ -80,8 +97,7 @@ button:hover {
     margin-top: 30px;
     padding: 20px;
     background-color: #f9f9f9;
-    border-radius: 5px;
-    text-align: center;
+    border-radius: 10px;
 }
 
 #interest-result {
@@ -89,4 +105,5 @@ button:hover {
     font-weight: bold;
     color: #27ae60;
     margin-top: 10px;
+    line-height: 1.6;
 }
