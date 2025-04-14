@@ -1,206 +1,149 @@
-// ✅ بيانات البنوك والشهادات (محدثة)
-const bankProducts = [
+// بيانات البنوك والمنتجات
+const banksData = [
   {
-    bank: "بنك مصر",
-    certificates: [
-      { 
-        name: "شهادة القمة", 
-        rate: 17, 
-        type: "شهادة", 
-        duration: "3 سنوات",
-        minAmount: 1000,
-        currency: "EGP"
-      },
-      { 
-        name: "وديعة استثمارية", 
-        rate: 15.5, 
-        type: "وديعة", 
-        duration: "1 سنة",
-        minAmount: 5000,
-        currency: "EGP"
-      }
+    name: "بنك مصر",
+    products: [
+      { name: "شهادة القمة", type: "شهادة", rate: 17, minAmount: 1000 },
+      { name: "وديعة التوفير", type: "وديعة", rate: 15, minAmount: 5000 }
     ]
   },
   {
-    bank: "البنك الأهلي",
-    certificates: [
-      { 
-        name: "شهادة الاستثمار", 
-        rate: 18.5, 
-        type: "شهادة", 
-        duration: "5 سنوات",
-        minAmount: 5000,
-        currency: "EGP"
-      },
-      { 
-        name: "وديعة قصيرة الأجل", 
-        rate: 16, 
-        type: "وديعة", 
-        duration: "6 أشهر",
-        minAmount: 10000,
-        currency: "USD"
-      }
+    name: "البنك الأهلي",
+    products: [
+      { name: "شهادة الأهلي المميزة", type: "شهادة", rate: 18.5, minAmount: 5000 },
+      { name: "وديعة الثبات", type: "وديعة", rate: 16, minAmount: 10000 }
     ]
   }
 ];
 
-// ✅ تهيئة التطبيق عند تحميل الصفحة
+// تهيئة التطبيق عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', function() {
-  populateBanks();
-  
-  // إضافة حدث لإعادة الحساب عند تغيير أي مدخل
-  document.getElementById('amount').addEventListener('input', calculateInterest);
-  document.getElementById('rate').addEventListener('input', calculateInterest);
-  document.querySelectorAll('input[name="period"]').forEach(radio => {
-    radio.addEventListener('change', calculateInterest);
-  });
-  document.getElementById('currency').addEventListener('change', calculateInterest);
+  initBanks();
+  setupEventListeners();
 });
 
-// ✅ تعبئة قائمة البنوك
-function populateBanks() {
-  const bankSelect = document.getElementById("bank");
-  bankSelect.innerHTML = '<option value="" disabled selected>-- اختر البنك --</option>';
-  
-  bankProducts.forEach(bank => {
-    const option = document.createElement("option");
-    option.value = bank.bank;
-    option.textContent = bank.bank;
+// تعبئة قائمة البنوك
+function initBanks() {
+  const bankSelect = document.getElementById('bank');
+  banksData.forEach(bank => {
+    const option = document.createElement('option');
+    option.value = bank.name;
+    option.textContent = bank.name;
     bankSelect.appendChild(option);
   });
 }
 
-// ✅ تحديث قائمة المنتجات البنكية
-function updateCertificates() {
-  const bankName = document.getElementById("bank").value;
-  const certificateSelect = document.getElementById("certificate");
-  const selectedFilter = document.querySelector('input[name="filterType"]:checked').value;
+// إعداد مستمعات الأحداث
+function setupEventListeners() {
+  document.getElementById('bank').addEventListener('change', updateProducts);
+  document.querySelectorAll('input[name="productType"]').forEach(radio => {
+    radio.addEventListener('change', updateProducts);
+  });
+  document.getElementById('calculate-btn').addEventListener('click', calculateReturn);
+}
 
-  certificateSelect.innerHTML = '<option value="" disabled selected>-- اختر منتج بنكي --</option>';
-
-  if (!bankName) return;
-
-  const selectedBank = bankProducts.find(bank => bank.bank === bankName);
-  if (!selectedBank) return;
-
-  let filteredProducts = selectedBank.certificates;
+// تحديث قائمة المنتجات
+function updateProducts() {
+  const bankName = document.getElementById('bank').value;
+  const productType = document.querySelector('input[name="productType"]:checked').value;
+  const productSelect = document.getElementById('product');
   
-  if (selectedFilter !== "all") {
-    filteredProducts = filteredProducts.filter(product => product.type === selectedFilter);
+  productSelect.innerHTML = '<option value="" disabled selected>-- اختر منتج --</option>';
+  
+  if (!bankName) return;
+  
+  const selectedBank = banksData.find(bank => bank.name === bankName);
+  if (!selectedBank) return;
+  
+  let products = selectedBank.products;
+  
+  if (productType !== 'all') {
+    products = products.filter(product => product.type === productType);
   }
-
-  filteredProducts.forEach(product => {
-    const option = document.createElement("option");
+  
+  products.forEach(product => {
+    const option = document.createElement('option');
     option.value = product.name;
-    option.textContent = `${product.name} (${product.rate}%) - ${product.type}`;
+    option.textContent = `${product.name} (${product.rate}%)`;
     option.dataset.rate = product.rate;
-    certificateSelect.appendChild(option);
+    productSelect.appendChild(option);
   });
 }
 
-// ✅ تعيين نسبة الفائدة تلقائيًا
-function setRateFromCertificate() {
-  const certSelect = document.getElementById("certificate");
-  const rateInput = document.getElementById("rate");
+// حساب العائد
+function calculateReturn() {
+  const amount = parseFloat(document.getElementById('amount').value);
+  const productSelect = document.getElementById('product');
+  const period = document.getElementById('period').value;
   
-  if (certSelect.selectedIndex > 0) {
-    rateInput.value = certSelect.options[certSelect.selectedIndex].dataset.rate;
-    calculateInterest(); // تحديث النتيجة تلقائيًا
-  } else {
-    rateInput.value = "";
+  if (!validateInputs(amount, productSelect)) return;
+  
+  const rate = parseFloat(productSelect.options[productSelect.selectedIndex].dataset.rate);
+  const result = calculate(amount, rate, period);
+  
+  displayResult(amount, rate, result, period);
+}
+
+// التحقق من المدخلات
+function validateInputs(amount, productSelect) {
+  const resultDiv = document.getElementById('result');
+  
+  if (isNaN(amount) {
+    showError("الرجاء إدخال مبلغ صحيح");
+    return false;
+  }
+  
+  if (productSelect.selectedIndex <= 0) {
+    showError("الرجاء اختيار منتج بنكي");
+    return false;
+  }
+  
+  return true;
+}
+
+// عرض الخطأ
+function showError(message) {
+  const resultContent = document.getElementById('result-content');
+  resultContent.innerHTML = `<div class="error">${message}</div>`;
+  document.getElementById('result').classList.remove('hidden');
+}
+
+// حساب العائد
+function calculate(amount, rate, period) {
+  const yearlyReturn = (amount * rate) / 100;
+  
+  switch (period) {
+    case "يومي": return yearlyReturn / 365;
+    case "شهري": return yearlyReturn / 12;
+    case "سنوي": return yearlyReturn;
+    default: return yearlyReturn / 12;
   }
 }
 
-// ✅ حساب العائد البنكي
-function calculateInterest() {
-  const amountInput = document.getElementById("amount");
-  const rateInput = document.getElementById("rate");
-  const period = document.querySelector('input[name="period"]:checked').value;
-  const currency = document.getElementById("currency").value;
-  const resultDiv = document.getElementById("result");
-
-  // التحقق من صحة المدخلات
-  if (!amountInput.value || !rateInput.value) {
-    resultDiv.textContent = "الرجاء إدخال جميع البيانات المطلوبة";
-    return;
-  }
-
-  const amount = parseFloat(amountInput.value);
-  const rate = parseFloat(rateInput.value);
-
-  if (isNaN(amount) || isNaN(rate) || amount <= 0 || rate <= 0) {
-    resultDiv.textContent = "الرجاء إدخال قيم صحيحة أكبر من الصفر";
-    return;
-  }
-
-  const yearlyInterest = (amount * rate) / 100;
-  let result;
-
-  switch (period) {
-    case "daily":
-      result = yearlyInterest / 365;
-      break;
-    case "monthly":
-      result = yearlyInterest / 12;
-      break;
-    case "yearly":
-      result = yearlyInterest;
-      break;
-  }
-
-  const currencySymbol = getCurrencySymbol(currency);
-  const periodName = getPeriodName(period);
-
-  resultDiv.innerHTML = `
-    <div class="result-card">
-      <h3>نتيجة الحساب</h3>
-      <p>العائد ${periodName}: <strong>${result.toFixed(2)} ${currencySymbol}</strong></p>
-      <p>المبلغ الأصلي: ${amount.toFixed(2)} ${currencySymbol}</p>
-      <p>المبلغ الإجمالي: ${(amount + (period === 'yearly' ? result : yearlyInterest)).toFixed(2)} ${currencySymbol}</p>
+// عرض النتيجة
+function displayResult(amount, rate, result, period) {
+  const resultContent = document.getElementById('result-content');
+  const formattedAmount = amount.toLocaleString('ar-EG');
+  const formattedResult = result.toLocaleString('ar-EG', { maximumFractionDigits: 2 });
+  
+  resultContent.innerHTML = `
+    <div class="result-item">
+      <span>المبلغ المستثمر:</span>
+      <span>${formattedAmount} جنيه</span>
+    </div>
+    <div class="result-item">
+      <span>نسبة العائد:</span>
+      <span>${rate}%</span>
+    </div>
+    <div class="result-item">
+      <span>العائد ${period}:</span>
+      <span>${formattedResult} جنيه</span>
+    </div>
+    <div class="result-total">
+      <span>إجمالي المبلغ:</span>
+      <span>${(amount + (period === 'سنوي' ? result : result * (period === 'شهري' ? 12 : 365))).toLocaleString('ar-EG')} جنيه</span>
     </div>
   `;
-}
-
-// ✅ اسم الفترة
-function getPeriodName(period) {
-  const periods = {
-    daily: "اليومي",
-    monthly: "الشهري",
-    yearly: "السنوي"
-  };
-  return periods[period] || '';
-}
-
-// ✅ رمز العملة
-function getCurrencySymbol(currency) {
-  const symbols = {
-    EGP: "جنيه",
-    USD: "دولار",
-    SAR: "ريال",
-    EUR: "يورو"
-  };
-  return symbols[currency] || '';
-}
-
-// ✅ تبديل الوضع الليلي
-function toggleTheme() {
-  document.body.classList.toggle('dark-theme');
-  const btn = document.getElementById("toggleTheme");
-  btn.textContent = document.body.classList.contains("dark-theme") 
-    ? "☀️ الوضع النهاري" 
-    : "🌙 الوضع الليلي";
   
-  // حفظ التفضيل في localStorage
-  localStorage.setItem('darkMode', document.body.classList.contains('dark-theme'));
+  document.getElementById('result').classList.remove('hidden');
 }
-
-// ✅ التحقق من الوضع المظلم عند التحميل
-function checkDarkModePreference() {
-  if (localStorage.getItem('darkMode') === 'true') {
-    document.body.classList.add('dark-theme');
-    document.getElementById("toggleTheme").textContent = "☀️ الوضع النهاري";
-  }
-}
-
-// تهيئة الوضع المظلم عند التحميل
-checkDarkModePreference();
