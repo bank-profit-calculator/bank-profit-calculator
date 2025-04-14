@@ -7,44 +7,51 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="calculator">
-        <h1>حاسبة الفوائد البسيطة</h1>
-        
-        <div class="input-group">
-            <label for="amount">المبلغ الأساسي:</label>
-            <input type="number" id="amount" placeholder="أدخل المبلغ">
-        </div>
-        
-        <div class="input-group">
-            <label for="rate">نسبة الفائدة (%):</label>
-            <input type="number" id="rate" placeholder="أدخل النسبة">
-        </div>
-        
-        <div class="input-group">
-            <label>الفترة:</label>
-            <div class="time-options">
-                <div>
-                    <input type="number" id="days" placeholder="أيام" value="0">
-                    <span>أيام</span>
+    <div class="container">
+        <div class="calculator">
+            <h1>حاسبة الفوائد البسيطة</h1>
+            
+            <div class="input-group">
+                <label for="amount">المبلغ الأساسي:</label>
+                <input type="number" id="amount" placeholder="أدخل المبلغ">
+            </div>
+            
+            <div class="input-group">
+                <label for="rate">نسبة الفائدة (%):</label>
+                <input type="number" id="rate" placeholder="أدخل النسبة">
+            </div>
+            
+            <div class="input-group">
+                <label>الفترة:</label>
+                <div class="time-period">
+                    <div class="time-option">
+                        <input type="radio" id="days" name="period" value="days">
+                        <label for="days">أيام</label>
+                    </div>
+                    <div class="time-option">
+                        <input type="radio" id="months" name="period" value="months">
+                        <label for="months">أشهر</label>
+                    </div>
+                    <div class="time-option">
+                        <input type="radio" id="years" name="period" value="years" checked>
+                        <label for="years">سنوات</label>
+                    </div>
                 </div>
-                <div>
-                    <input type="number" id="months" placeholder="أشهر" value="0">
-                    <span>أشهر</span>
-                </div>
-                <div>
-                    <input type="number" id="years" placeholder="سنوات" value="0">
-                    <span>سنوات</span>
-                </div>
+                <input type="number" id="time-value" placeholder="أدخل الفترة">
+            </div>
+            
+            <button onclick="calculateInterest()">احسب</button>
+            
+            <div class="result">
+                <h2>النتيجة:</h2>
+                <p id="interest-result">سيتظهر هنا نتيجة الحساب</p>
             </div>
         </div>
-        
-        <button onclick="calculateInterest()">احسب</button>
-        
-        <div class="result">
-            <h2>النتيجة:</h2>
-            <p id="interest-result">سيتظهر هنا نتيجة الحساب</p>
-        </div>
     </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
 
     <script src="script.js"></script>
 </body>
