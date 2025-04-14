@@ -2,92 +2,66 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>حاسبة العائد البنكي 💰</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="حاسبة لحساب العائد على الشهادات البنكية والودائع">
+  <title>حاسبة العائد البنكي الذكية</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://i.postimg.cc/Qxp0n6jY/logo.webp">
 </head>
 <body>
+  <div class="app-container">
+    <header>
+      <img src="https://i.postimg.cc/Qxp0n6jY/logo.webp" alt="شعار الحاسبة البنكية" class="app-logo">
+      <h1>حاسبة العائد البنكي</h1>
+    </header>
 
-  <div class="container">
-    <!-- الشعار -->
-    <img src="https://i.postimg.cc/Qxp0n6jY/logo.webp" alt="شعار حاسبة العائد البنكي" class="logo" loading="lazy">
-
-    <!-- العنوان -->
-    <h1>حاسبة العائد البنكي 💰</h1>
-
-    <!-- اختيار البنك -->
-    <div class="input-group">
-      <label for="bank">اختر البنك:</label>
-      <select id="bank" onchange="updateCertificates()" required>
-        <option value="" disabled selected>-- اختر البنك --</option>
-      </select>
-    </div>
-
-    <!-- فلتر نوع الشهادة -->
-    <div class="input-group filter-options">
-      <span class="filter-label">نوع المنتج:</span>
-      <div class="radio-group">
-        <label><input type="radio" name="filterType" value="all" checked onchange="updateCertificates()"> الكل</label>
-        <label><input type="radio" name="filterType" value="شهادة" onchange="updateCertificates()"> شهادات</label>
-        <label><input type="radio" name="filterType" value="وديعة" onchange="updateCertificates()"> ودائع</label>
+    <main class="calculator">
+      <div class="input-group">
+        <label for="bank">اختر البنك:</label>
+        <select id="bank" required>
+          <option value="" disabled selected>-- اختر بنك --</option>
+        </select>
       </div>
-    </div>
 
-    <!-- اختيار الشهادة / الوديعة -->
-    <div class="input-group">
-      <label for="certificate">اختر المنتج:</label>
-      <select id="certificate" onchange="setRateFromCertificate()" required>
-        <option value="" disabled selected>-- اختر منتج بنكي --</option>
-      </select>
-    </div>
-
-    <!-- إدخال المبلغ -->
-    <div class="input-group">
-      <label for="amount">المبلغ:</label>
-      <input type="number" id="amount" placeholder="أدخل المبلغ بالجنيه المصري" min="1" required>
-    </div>
-
-    <!-- إدخال نسبة الفائدة -->
-    <div class="input-group">
-      <label for="rate">نسبة الفائدة:</label>
-      <input type="number" id="rate" placeholder="تظهر تلقائيًا بعد اختيار المنتج" step="0.01" min="0" max="100" required>
-    </div>
-
-    <!-- فترة العائد -->
-    <div class="input-group period-options">
-      <span class="period-label">فترة العائد:</span>
-      <div class="radio-group">
-        <label><input type="radio" name="period" value="daily" id="daily"> يومي</label>
-        <label><input type="radio" name="period" value="monthly" checked id="monthly"> شهري</label>
-        <label><input type="radio" name="period" value="yearly" id="yearly"> سنوي</label>
+      <div class="input-group">
+        <label>نوع المنتج:</label>
+        <div class="radio-group">
+          <label><input type="radio" name="productType" value="all" checked> الكل</label>
+          <label><input type="radio" name="productType" value="شهادة"> شهادات</label>
+          <label><input type="radio" name="productType" value="وديعة"> ودائع</label>
+        </div>
       </div>
-    </div>
 
-    <!-- اختيار العملة -->
-    <div class="input-group">
-      <label for="currency">العملة:</label>
-      <select id="currency">
-        <option value="EGP">جنيه مصري 🇪🇬</option>
-        <option value="USD">دولار أمريكي 🇺🇸</option>
-        <option value="SAR">ريال سعودي 🇸🇦</option>
-        <option value="EUR">يورو 🇪🇺</option>
-      </select>
-    </div>
+      <div class="input-group">
+        <label for="product">اختر المنتج:</label>
+        <select id="product" required>
+          <option value="" disabled selected>-- اختر منتج --</option>
+        </select>
+      </div>
 
-    <!-- أزرار التحكم -->
-    <div class="button-group">
-      <button type="button" class="calculate-btn" onclick="calculateInterest()">احسب العائد 💸</button>
-      <button type="button" class="theme-btn" id="toggleTheme" onclick="toggleTheme()">🌙 الوضع الليلي</button>
-    </div>
+      <div class="input-group">
+        <label for="amount">المبلغ (جنيه مصري):</label>
+        <input type="number" id="amount" min="1000" step="1000" required>
+      </div>
 
-    <!-- النتيجة -->
-    <div id="result" class="result-container" aria-live="polite"></div>
+      <div class="input-group">
+        <label for="period">فترة الحساب:</label>
+        <select id="period">
+          <option value="يومي">يومي</option>
+          <option value="شهري" selected>شهري</option>
+          <option value="سنوي">سنوي</option>
+        </select>
+      </div>
 
-    <!-- الفوتر -->
+      <button id="calculate-btn" class="primary-btn">احسب العائد</button>
+
+      <div id="result" class="result-container hidden">
+        <h3>نتيجة الحساب</h3>
+        <div id="result-content"></div>
+      </div>
+    </main>
+
     <footer>
-      <p><a href="privacy.html" class="privacy-link">سياسة الخصوصية</a></p>
-      <p class="copyright">© 2023 حاسبة العائد البنكي. جميع الحقوق محفوظة.</p>
+      <p>© 2023 حاسبة العائد البنكي | <a href="privacy.html">سياسة الخصوصية</a></p>
     </footer>
   </div>
 
