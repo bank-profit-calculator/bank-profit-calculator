@@ -1,149 +1,22 @@
-// بيانات البنوك والمنتجات
-const banksData = [
-  {
-    name: "بنك مصر",
-    products: [
-      { name: "شهادة القمة", type: "شهادة", rate: 17, minAmount: 1000 },
-      { name: "وديعة التوفير", type: "وديعة", rate: 15, minAmount: 5000 }
-    ]
-  },
-  {
-    name: "البنك الأهلي",
-    products: [
-      { name: "شهادة الأهلي المميزة", type: "شهادة", rate: 18.5, minAmount: 5000 },
-      { name: "وديعة الثبات", type: "وديعة", rate: 16, minAmount: 10000 }
-    ]
-  }
-];
-
-// تهيئة التطبيق عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', function() {
-  initBanks();
-  setupEventListeners();
-});
-
-// تعبئة قائمة البنوك
-function initBanks() {
-  const bankSelect = document.getElementById('bank');
-  banksData.forEach(bank => {
-    const option = document.createElement('option');
-    option.value = bank.name;
-    option.textContent = bank.name;
-    bankSelect.appendChild(option);
-  });
-}
-
-// إعداد مستمعات الأحداث
-function setupEventListeners() {
-  document.getElementById('bank').addEventListener('change', updateProducts);
-  document.querySelectorAll('input[name="productType"]').forEach(radio => {
-    radio.addEventListener('change', updateProducts);
-  });
-  document.getElementById('calculate-btn').addEventListener('click', calculateReturn);
-}
-
-// تحديث قائمة المنتجات
-function updateProducts() {
-  const bankName = document.getElementById('bank').value;
-  const productType = document.querySelector('input[name="productType"]:checked').value;
-  const productSelect = document.getElementById('product');
-  
-  productSelect.innerHTML = '<option value="" disabled selected>-- اختر منتج --</option>';
-  
-  if (!bankName) return;
-  
-  const selectedBank = banksData.find(bank => bank.name === bankName);
-  if (!selectedBank) return;
-  
-  let products = selectedBank.products;
-  
-  if (productType !== 'all') {
-    products = products.filter(product => product.type === productType);
-  }
-  
-  products.forEach(product => {
-    const option = document.createElement('option');
-    option.value = product.name;
-    option.textContent = `${product.name} (${product.rate}%)`;
-    option.dataset.rate = product.rate;
-    productSelect.appendChild(option);
-  });
-}
-
-// حساب العائد
-function calculateReturn() {
-  const amount = parseFloat(document.getElementById('amount').value);
-  const productSelect = document.getElementById('product');
-  const period = document.getElementById('period').value;
-  
-  if (!validateInputs(amount, productSelect)) return;
-  
-  const rate = parseFloat(productSelect.options[productSelect.selectedIndex].dataset.rate);
-  const result = calculate(amount, rate, period);
-  
-  displayResult(amount, rate, result, period);
-}
-
-// التحقق من المدخلات
-function validateInputs(amount, productSelect) {
-  const resultDiv = document.getElementById('result');
-  
-  if (isNaN(amount) {
-    showError("الرجاء إدخال مبلغ صحيح");
-    return false;
-  }
-  
-  if (productSelect.selectedIndex <= 0) {
-    showError("الرجاء اختيار منتج بنكي");
-    return false;
-  }
-  
-  return true;
-}
-
-// عرض الخطأ
-function showError(message) {
-  const resultContent = document.getElementById('result-content');
-  resultContent.innerHTML = `<div class="error">${message}</div>`;
-  document.getElementById('result').classList.remove('hidden');
-}
-
-// حساب العائد
-function calculate(amount, rate, period) {
-  const yearlyReturn = (amount * rate) / 100;
-  
-  switch (period) {
-    case "يومي": return yearlyReturn / 365;
-    case "شهري": return yearlyReturn / 12;
-    case "سنوي": return yearlyReturn;
-    default: return yearlyReturn / 12;
-  }
-}
-
-// عرض النتيجة
-function displayResult(amount, rate, result, period) {
-  const resultContent = document.getElementById('result-content');
-  const formattedAmount = amount.toLocaleString('ar-EG');
-  const formattedResult = result.toLocaleString('ar-EG', { maximumFractionDigits: 2 });
-  
-  resultContent.innerHTML = `
-    <div class="result-item">
-      <span>المبلغ المستثمر:</span>
-      <span>${formattedAmount} جنيه</span>
-    </div>
-    <div class="result-item">
-      <span>نسبة العائد:</span>
-      <span>${rate}%</span>
-    </div>
-    <div class="result-item">
-      <span>العائد ${period}:</span>
-      <span>${formattedResult} جنيه</span>
-    </div>
-    <div class="result-total">
-      <span>إجمالي المبلغ:</span>
-      <span>${(amount + (period === 'سنوي' ? result : result * (period === 'شهري' ? 12 : 365))).toLocaleString('ar-EG')} جنيه</span>
-    </div>
-  `;
-  
-  document.getElementById('result').classList.remove('hidden');
+function calculateInterest() {
+    // الحصول على القيم من حقول الإدخال
+    const amount = parseFloat(document.getElementById('amount').value);
+    const rate = parseFloat(document.getElementById('rate').value);
+    const time = parseFloat(document.getElementById('time').value);
+    
+    // التحقق من صحة المدخلات
+    if (isNaN(amount) || isNaN(rate) || isNaN(time)) {
+        document.getElementById('interest-result').textContent = 'الرجاء إدخال قيم صحيحة في جميع الحقول';
+        return;
+    }
+    
+    // حساب الفائدة البسيطة
+    const interest = (amount * rate * time) / 100;
+    const total = amount + interest;
+    
+    // عرض النتيجة
+    document.getElementById('interest-result').innerHTML = `
+        الفائدة: ${interest.toFixed(2)}<br>
+        المبلغ الإجمالي: ${total.toFixed(2)}
+    `;
 }
