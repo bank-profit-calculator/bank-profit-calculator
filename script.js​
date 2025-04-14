@@ -124,3 +124,6 @@ function toggleTheme() {
 window.onload = function () {
   populateBanks();
 };
+// تحقق من أن المدخلات أرقام (Number) وليست نصوص (String):
+const num1 = parseFloat(document.getElementById('num1').value);
+const num2 = parseFloat(document.getElementById('num2').value);
