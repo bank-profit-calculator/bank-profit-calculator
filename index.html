@@ -1,70 +1,38 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>حاسبة العائد البنكي الذكية</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="https://i.postimg.cc/Qxp0n6jY/logo.webp">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة الفوائد البسيطة</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app-container">
-    <header>
-      <img src="https://i.postimg.cc/Qxp0n6jY/logo.webp" alt="شعار الحاسبة البنكية" class="app-logo">
-      <h1>حاسبة العائد البنكي</h1>
-    </header>
-
-    <main class="calculator">
-      <div class="input-group">
-        <label for="bank">اختر البنك:</label>
-        <select id="bank" required>
-          <option value="" disabled selected>-- اختر بنك --</option>
-        </select>
-      </div>
-
-      <div class="input-group">
-        <label>نوع المنتج:</label>
-        <div class="radio-group">
-          <label><input type="radio" name="productType" value="all" checked> الكل</label>
-          <label><input type="radio" name="productType" value="شهادة"> شهادات</label>
-          <label><input type="radio" name="productType" value="وديعة"> ودائع</label>
+    <div class="calculator">
+        <h1>حاسبة الفوائد البسيطة</h1>
+        
+        <div class="input-group">
+            <label for="amount">المبلغ الأساسي:</label>
+            <input type="number" id="amount" placeholder="أدخل المبلغ">
         </div>
-      </div>
+        
+        <div class="input-group">
+            <label for="rate">نسبة الفائدة (%):</label>
+            <input type="number" id="rate" placeholder="أدخل النسبة">
+        </div>
+        
+        <div class="input-group">
+            <label for="time">الفترة (سنوات):</label>
+            <input type="number" id="time" placeholder="أدخل الفترة">
+        </div>
+        
+        <button onclick="calculateInterest()">احسب</button>
+        
+        <div class="result">
+            <h2>النتيجة:</h2>
+            <p id="interest-result">سيتظهر هنا نتيجة الحساب</p>
+        </div>
+    </div>
 
-      <div class="input-group">
-        <label for="product">اختر المنتج:</label>
-        <select id="product" required>
-          <option value="" disabled selected>-- اختر منتج --</option>
-        </select>
-      </div>
-
-      <div class="input-group">
-        <label for="amount">المبلغ (جنيه مصري):</label>
-        <input type="number" id="amount" min="1000" step="1000" required>
-      </div>
-
-      <div class="input-group">
-        <label for="period">فترة الحساب:</label>
-        <select id="period">
-          <option value="يومي">يومي</option>
-          <option value="شهري" selected>شهري</option>
-          <option value="سنوي">سنوي</option>
-        </select>
-      </div>
-
-      <button id="calculate-btn" class="primary-btn">احسب العائد</button>
-
-      <div id="result" class="result-container hidden">
-        <h3>نتيجة الحساب</h3>
-        <div id="result-content"></div>
-      </div>
-    </main>
-
-    <footer>
-      <p>© 2023 حاسبة العائد البنكي | <a href="privacy.html">سياسة الخصوصية</a></p>
-    </footer>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
