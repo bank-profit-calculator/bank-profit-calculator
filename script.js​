@@ -111,12 +111,15 @@ function calculateInterest() {
   let rate = parseFloat(document.getElementById("rate").value);
   let period = document.querySelector('input[name="period"]:checked')?.value;
   let currency = document.getElementById("currency").value;
+  let resultDiv = document.getElementById("result");
 
+  // التحقق من صحة البيانات
   if (isNaN(amount) || isNaN(rate) || !period) {
-    document.getElementById("result").textContent = "الرجاء إدخال جميع البيانات المطلوبة";
+    resultDiv.innerHTML = `<p style="color: red;">⚠️ الرجاء إدخال جميع البيانات المطلوبة</p>`;
     return;
   }
 
+  // حساب العائد السنوي
   let yearlyInterest = (amount * rate) / 100;
   let result;
 
@@ -127,6 +130,19 @@ function calculateInterest() {
   } else {
     result = yearlyInterest;
   }
+
+  // تنسيق النتيجة
+  resultDiv.innerHTML = `
+    <div style="background-color: #f3f3f3; padding: 15px; border-radius: 10px; margin-top: 20px; text-align: center;">
+      <h3>📊 النتيجة:</h3>
+      <p style="font-size: 20px;">
+        العائد <strong>${getPeriodName(period)}</strong> هو:
+        <span style="color: green; font-weight: bold;">${result.toFixed(2)} ${getCurrencySymbol(currency)}</span>
+      </p>
+    </div>
+  `;
+}
+
 
   document.getElementById("result").textContent =
     `العائد ${getPeriodName(period)}: ${result.toFixed(2)} ${getCurrencySymbol(currency)}`;
