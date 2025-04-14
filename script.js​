@@ -1,6 +1,19 @@
 // بيانات البنوك وشهاداتها
 const bankCertificates = [
-  {
+    // ... (ابقى بيانات البنوك كما هي بدون تغيير)
+];
+// دالة حساب العائد المعدلة
+function calculateInterest() {
+    const amount = parseFloat(document.getElementById("amount").value);
+    const rate = parseFloat(document.getElementById("rate").value);
+    const period = document.querySelector('input[name="period"]:checked')?.value;
+    const currency = document.getElementById("currency").value;
+    const resultDiv = document.getElementById("result");
+
+    if (isNaN(amount) || isNaN(rate) || !period) {
+        resultDiv.innerHTML = '<p style="color: red;">⚠️ الرجاء إدخال جميع البيانات المطلوبة</p>';
+        return;
+    }
     bank: "البنك الأهلي المصري",
     certificates: [
       { name: "شهادة القمة", rate: 19, type: "ثابت", pros: "عائد مرتفع مع إمكانية السحب الشهري", cons: "لا يوجد تجديد تلقائي بعد 6 أشهر" },
