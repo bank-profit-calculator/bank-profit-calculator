@@ -21,8 +21,21 @@
         </div>
         
         <div class="input-group">
-            <label for="time">الفترة (سنوات):</label>
-            <input type="number" id="time" placeholder="أدخل الفترة">
+            <label>الفترة:</label>
+            <div class="time-options">
+                <div>
+                    <input type="number" id="days" placeholder="أيام">
+                    <span>أيام</span>
+                </div>
+                <div>
+                    <input type="number" id="months" placeholder="أشهر">
+                    <span>أشهر</span>
+                </div>
+                <div>
+                    <input type="number" id="years" placeholder="سنوات">
+                    <span>سنوات</span>
+                </div>
+            </div>
         </div>
         
         <button onclick="calculateInterest()">احسب</button>
