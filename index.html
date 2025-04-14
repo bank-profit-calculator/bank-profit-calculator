@@ -7,46 +7,44 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="calculator">
-            <h1>حاسبة الفوائد البسيطة</h1>
-            
-            <div class="input-group">
-                <label for="amount">المبلغ الأساسي:</label>
-                <input type="number" id="amount" placeholder="أدخل المبلغ">
+    <div class="calculator-container">
+        <h1>حاسبة الفوائد البسيطة</h1>
+        
+        <div class="input-group">
+            <label for="amount">المبلغ الأساسي:</label>
+            <input type="number" id="amount" placeholder="أدخل المبلغ">
+        </div>
+        
+        <div class="input-group">
+            <label for="rate">نسبة الفائدة (%):</label>
+            <input type="number" id="rate" placeholder="أدخل النسبة">
+        </div>
+        
+        <div class="input-group">
+            <label>اختر نوع الفترة:</label>
+            <div class="time-options">
+                <label class="time-option">
+                    <input type="radio" name="period" value="days">
+                    <span>أيام</span>
+                </label>
+                <label class="time-option">
+                    <input type="radio" name="period" value="months">
+                    <span>أشهر</span>
+                </label>
+                <label class="time-option">
+                    <input type="radio" name="period" value="years" checked>
+                    <span>سنوات</span>
+                </label>
             </div>
-            
-            <div class="input-group">
-                <label for="rate">نسبة الفائدة (%):</label>
-                <input type="number" id="rate" placeholder="أدخل النسبة">
-            </div>
-            
-            <div class="input-group">
-                <label>اختر نوع الفترة:</label>
-                <div class="time-options">
-                    <label class="time-option">
-                        <input type="radio" name="period" value="days">
-                        <span>أيام</span>
-                    </label>
-                    <label class="time-option">
-                        <input type="radio" name="period" value="months">
-                        <span>أشهر</span>
-                    </label>
-                    <label class="time-option">
-                        <input type="radio" name="period" value="years" checked>
-                        <span>سنوات</span>
-                    </label>
-                </div>
-                <input type="number" id="time-value" placeholder="أدخل مدة الفترة">
-            </div>
-            
-            <button id="calculate-btn">احسب</button>
-            
-            <div class="result">
-                <h2>النتائج:</h2>
-                <div id="interest-result">
-                    <p>سيتظهر هنا نتيجة الحساب</p>
-                </div>
+            <input type="number" id="time-value" placeholder="أدخل مدة الفترة">
+        </div>
+        
+        <button id="calculate-btn">احسب</button>
+        
+        <div class="result">
+            <h2>النتائج:</h2>
+            <div id="interest-result">
+                <p>سيتظهر هنا نتيجة الحساب</p>
             </div>
         </div>
     </div>
