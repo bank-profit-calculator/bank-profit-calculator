@@ -1,68 +1,215 @@
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f6f8;
-  color: #333;
-  margin: 0;
-  padding: 10px;
-  direction: rtl;
+/* CSS المعدل مع تحسينات التنسيق */
+:root {
+  --primary-color: #0077cc;
+  --hover-color: #005fa3;
+  --background-color: #f4f6f8;
+  --text-color: #333;
+  --input-border: #ddd;
+  --container-bg: #fff;
+  --footer-color: #888;
 }
 
-/* توسيط العناصر */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* تصميم الحاوية الرئيسية */
 .container {
-  max-width: 400px; /* تقليل من 600px إلى 400px */
-  margin: 0 auto;
-  padding: 15px;
+  width: 90%;
+  max-width: 400px;
+  background-color: var(--container-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  margin: 20px auto;
   text-align: center;
 }
 
-
-/* اللوجو */
+/* تصميم اللوجو */
 .logo {
-  width: 60px; /* تقليل من 80px إلى 60px */
-  margin: 15px auto;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin: 0 auto 15px;
+  display: block;
 }
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-/* العنوان */
+
+/* العنوان الرئيسي */
 h1 {
-  font-size: 22px; /* تقليل من 26px إلى 22px */
-  margin-bottom: 20px;
+  font-size: 22px;
+  margin: 0 0 20px;
+  color: var(--primary-color);
+  font-weight: 600;
 }
 
-/* المدخلات والقوائم */
+/* مجموعات الإدخال */
+.input-group {
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* حقول الإدخال والقوائم المنسدلة */
 input, select {
-  padding: 8px;
-  margin: 8px auto;
+  padding: 10px 12px;
+  margin: 0 auto;
   width: 100%;
-  max-width: 260px; /* تقليل من 300px إلى 260px */
+  max-width: 280px;
   font-size: 14px;
-}
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  background-color: #fff;
+  transition: border-color 0.3s;
 }
 
-/* الأزرار */
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(0, 119, 204, 0.2);
+}
+
+/* خيارات الفلتر والفترة */
+.filter-options, .period-options {
+  margin: 15px 0;
+  text-align: center;
+}
+
+.radio-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 8px;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* تصميم الأزرار */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+
 button {
-  padding: 10px 20px; /* تقليل من 12px 25px إلى 10px 20px */
+  padding: 10px 20px;
   font-size: 14px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
-
 
 button:hover {
-  background-color: #005fa3;
+  background-color: var(--hover-color);
 }
 
-/* النتيجة */
-#result {
-  font-size: 18px; /* تقليل من 20px إلى 18px */
+button.calculate-btn {
+  font-weight: 600;
 }
-/* الفوتر */
+
+button.theme-btn {
+  background-color: #555;
+}
+
+button.theme-btn:hover {
+  background-color: #333;
+}
+
+/* تصميم نتيجة الحساب */
+.result-container {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  text-align: right;
+}
+
+.result-card {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.result-card h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+  font-size: 16px;
+  text-align: center;
+}
+
+.result-card p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.result-card strong {
+  color: var(--primary-color);
+}
+
+/* تصميم الفوتر */
 footer {
-  margin-top: 30px;
-  font-size: 12px; /* تقليل من 14px إلى 12px */
-  color: #888;
+  margin-top: 25px;
+  font-size: 12px;
+  color: var(--footer-color);
+  text-align: center;
 }
+
 footer a {
-  color: #0077cc;
+  color: var(--primary-color);
   text-decoration: none;
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.copyright {
+  margin-top: 8px;
+}
+
+/* الوضع الليلي */
+body.dark-theme {
+  --background-color: #1a1a1a;
+  --container-bg: #2d2d2d;
+  --text-color: #f0f0f0;
+  --input-border: #444;
+  --footer-color: #aaa;
+}
+
+.dark-theme input,
+.dark-theme select {
+  background-color: #333;
+  color: #fff;
+  border-color: #555;
+}
+
+.dark-theme .result-container {
+  background-color: #252525;
 }
