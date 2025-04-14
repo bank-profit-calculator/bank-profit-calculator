@@ -290,3 +290,9 @@ window.onload = function () {
   buildComparisonTable();
   populateMultiBankFilter();
 };
+
+document.addEventListener('DOMContentLoaded', function () {
+  populateBanks();
+  buildComparisonTable();
+  populateMultiBankFilter();
+});
