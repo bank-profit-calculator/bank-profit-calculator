@@ -49,3 +49,26 @@
     <script src="script.js"></script>
 </body>
 </html>
+<script>
+function calculateInterest() {
+    const amount = parseFloat(document.getElementById('amount').value);
+    const rate = parseFloat(document.getElementById('rate').value);
+    const days = parseFloat(document.getElementById('days').value) || 0;
+    const months = parseFloat(document.getElementById('months').value) || 0;
+    const years = parseFloat(document.getElementById('years').value) || 0;
+    
+    if (isNaN(amount) || isNaN(rate)) {
+        document.getElementById('interest-result').textContent = 'الرجاء إدخال المبلغ ونسبة الفائدة';
+        return;
+    }
+    
+    const totalYears = years + (months / 12) + (days / 365);
+    const interest = (amount * rate * totalYears) / 100;
+    const total = amount + interest;
+    
+    document.getElementById('interest-result').innerHTML = `
+        الفائدة: ${interest.toFixed(2)}<br>
+        المبلغ الإجمالي: ${total.toFixed(2)}
+    `;
+}
+</script>
