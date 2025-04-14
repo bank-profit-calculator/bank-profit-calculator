@@ -1,11 +1,11 @@
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
     background-color: #f5f7fa;
     display: flex;
     justify-content: center;
@@ -14,15 +14,13 @@ body {
     padding: 20px;
 }
 
-.main-container {
+.container {
     width: 100%;
     max-width: 500px;
-    display: flex;
-    justify-content: center;
 }
 
 .calculator {
-    background-color: #ffffff;
+    background-color: white;
     border-radius: 15px;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
     padding: 30px;
@@ -33,47 +31,38 @@ body {
 h1 {
     color: #2c3e50;
     margin-bottom: 30px;
-    font-size: 24px;
 }
 
 .input-group {
     margin-bottom: 25px;
-    text-align: center;
+    text-align: right;
 }
 
-.input-group label {
+label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
     color: #34495e;
-    font-size: 16px;
 }
 
-.input-group input[type="number"] {
+input[type="number"] {
     width: 100%;
     padding: 12px 15px;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
     font-size: 16px;
-    text-align: center;
-    transition: border-color 0.3s;
-}
-
-.input-group input[type="number"]:focus {
-    border-color: #3498db;
-    outline: none;
+    text-align: right;
 }
 
 .time-options {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
     margin: 15px 0;
 }
 
 .time-option {
     position: relative;
-    cursor: pointer;
 }
 
 .time-option input[type="radio"] {
@@ -86,8 +75,8 @@ h1 {
     padding: 10px 20px;
     background-color: #f0f2f5;
     border-radius: 50px;
+    cursor: pointer;
     transition: all 0.3s;
-    font-size: 14px;
 }
 
 .time-option input[type="radio"]:checked + span {
@@ -100,13 +89,12 @@ button {
     color: white;
     border: none;
     padding: 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
     width: 100%;
-    transition: background-color 0.3s;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
     margin-top: 10px;
-    font-weight: bold;
+    transition: background-color 0.3s;
 }
 
 button:hover {
@@ -118,13 +106,7 @@ button:hover {
     padding: 20px;
     background-color: #f8f9fa;
     border-radius: 10px;
-    text-align: center;
-}
-
-.result h2 {
-    color: #2c3e50;
-    margin-bottom: 15px;
-    font-size: 20px;
+    text-align: right;
 }
 
 #interest-result {
