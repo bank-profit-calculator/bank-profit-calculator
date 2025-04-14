@@ -1,10 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const calculateBtn = document.getElementById('calculate-btn');
-    
-    calculateBtn.addEventListener('click', calculateInterest);
-});
-
-function calculateInterest() {
+document.getElementById('calculate-btn').addEventListener('click', function() {
     try {
         // الحصول على القيم المدخلة
         const amount = parseFloat(document.getElementById('amount').value);
@@ -51,11 +45,11 @@ function calculateInterest() {
     } catch (error) {
         showError(error.message);
     }
-}
+});
 
 function showError(message) {
     const resultDiv = document.getElementById('interest-result');
-    resultDiv.innerHTML = `<p style="color: #e74c3c;">${message}</p>`;
+    resultDiv.innerHTML = `<p class="error">${message}</p>`;
 }
 
 function showResult(amount, rate, time, periodName, interest, total) {
